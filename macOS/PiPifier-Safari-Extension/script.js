@@ -79,24 +79,18 @@ function shouldAddYouTubeButton() {
     //check if on youtube or player is embedded
     return (location.hostname.match(/^(www\.)?youtube\.com$/)
             || document.getElementsByClassName("ytp-right-controls").length > 0)
-    && document.getElementsByClassName('PiPifierButton').length == 0;
 }
 
 function addYouTubeButton() {
     if (!shouldAddYouTubeButton()) return;
-    var button = document.createElement("button");
-    button.className = "ytp-button PiPifierButton";
-    button.title = "PiP (by PiPifier)";
-    button.onclick = enablePiP;
-    //TODO add style
-    //button.style.backgroundImage = 'url('+ whiteSVG_Icon + ')';
-    var buttonImage = document.createElement("img");
-    buttonImage.src = whiteSVG_Icon;
-    buttonImage.width = 22;
-    buttonImage.height = 36;
-    button.appendChild(buttonImage);
 
-    document.getElementsByClassName("ytp-right-controls")[0].appendChild(button);
+    // disable youtube miniplayer
+    const miniPlayerBtn = document.querySelector(".ytp-miniplayer-button");
+    miniPlayerBtn.style.display = "none";
+    
+    // unhide native youtube player pip-button
+    const pipButton = document.querySelector(".ytp-pip-button");
+    pipButton.style.display = "inline";
 }
 
 
